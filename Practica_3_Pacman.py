@@ -124,6 +124,7 @@ def pintar_tablero(lista_comida, lista_pared,jugador):
     for pared in lista_pared:
         tablero[pared.getPosX()][pared.getPosY()] = "#"
 
+
     tablero[jugador.getPosX()][jugador.getPosY()] = jugador.getIcon()
 
     return tablero
@@ -143,7 +144,7 @@ def crear_comida(lista_comida,comidaTotales = 10):
             lista_comida.append(crearComida)
             index = index + 1
 
-def crear_pared(lista_pared, paredTotales = 10):
+def crear_pared(lista_pared, paredTotales = 8):
     index = 0
     while index < paredTotales:
         x_pared = random.randint(0,12)
@@ -203,6 +204,7 @@ def paredSiguiente4(jugador,lista_pared):
 
 def movimiento(jugador,lista_comida,lista_pared):
     #Crear comida
+    #crear_items(lista_comida,lista_pared)
     crear_comida(lista_comida)
     crear_pared(lista_pared)
     #Imprimir el tablero
@@ -216,6 +218,7 @@ def movimiento(jugador,lista_comida,lista_pared):
                 W - Arriba
                 S - Abajo
                 D - Derecha
+                E - Salir
                 -------------------------------
                 @ - Comida 5 puntos
                 # - No se puede mover
@@ -313,6 +316,9 @@ def movimiento(jugador,lista_comida,lista_pared):
                     f'-JUGADOR {jugador.getName()} - PUNTOS {jugador.puntos} - MOVIMIENTOS {jugador.movimientos} - COMIDA OBTENIDA {jugador.comidos} - COMIDA RESTANTE {len(lista_comida)}')
                 tablero = pintar_tablero(lista_comida, lista_pared, jugador)
                 imprimir_tablero(tablero)
+        if tecla == "e":
+            print("Has salido del la partida")
+            break
         if jugador.puntos >= 40 or len(lista_comida)==0:
             print("PARTIDA TERMINADA")
             print(
@@ -342,7 +348,7 @@ def iniciar_juego():
                 Ingrese una opción...
             """
         print(menu)
-        opcion = int(input("Ingrese una opción"))
+        opcion = int(input("Ingrese una opción: "))
         if opcion == 1:
             print("Iniciando Juego...")
             name = str(input("Ingrese su nombre:  "))
@@ -353,7 +359,9 @@ def iniciar_juego():
 
         if opcion == 2:
             print("Tabla de posiciones...")
-            for jugador in jugadores_en_partida:
+            jugadores_en_partida.sort(key=lambda x: x.movimientos)
+            first_three = jugadores_en_partida[:3]
+            for jugador in first_three:
                 print(f'Jugador - {jugador.getName()} - Movimientos {jugador.movimientos}')
         if opcion == 3:
             print("Espero te hayas divertido...")
@@ -365,3 +373,5 @@ lista_comida = []
 lista_pared = []
 jugadores_en_partida = []
 iniciar_juego()
+
+#python Practica_3_Pacman.py
