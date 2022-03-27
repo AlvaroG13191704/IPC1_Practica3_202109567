@@ -96,11 +96,11 @@ class Player():
 #------------------------------
 ##Creaciones
 def imprimir_tablero(tablero):
-    print("   --------------------------------")
+    print("".center(50,'-'))
 
     for fila in tablero:
         print("\t| {0[0]} {0[1]} {0[2]} {0[3]} {0[4]} {0[5]} {0[6]} {0[7]} {0[8]} {0[9]} {0[10]} {0[11]} {0[12]} | ".format(fila))
-    print("   --------------------------------")
+    print("".center(50,'-'))
 
 def pintar_tablero(lista_comida, lista_pared,jugador):
     tablero = [
@@ -129,7 +129,7 @@ def pintar_tablero(lista_comida, lista_pared,jugador):
 
     return tablero
 
-def crear_comida(lista_comida,comidaTotales = 10):
+def crear_comida(lista_comida,comidaTotales = random.randint(1,int((13*13)*0.4))):
     index = 0
     while index < comidaTotales:
         x_comida = random.randint(0,12)
@@ -144,7 +144,7 @@ def crear_comida(lista_comida,comidaTotales = 10):
             lista_comida.append(crearComida)
             index = index + 1
 
-def crear_pared(lista_pared, paredTotales = 8):
+def crear_pared(lista_pared, paredTotales = random.randint(1,int((13*13)*0.3))):
     index = 0
     while index < paredTotales:
         x_pared = random.randint(0,12)
@@ -362,7 +362,7 @@ def iniciar_juego():
             jugadores_en_partida.sort(key=lambda x: x.movimientos)
             first_three = jugadores_en_partida[:3]
             for jugador in first_three:
-                print(f'Jugador - {jugador.getName()} - Movimientos {jugador.movimientos}')
+                print(f'Jugador - {jugador.getName()} - Movimientos {jugador.movimientos} - Puntos {jugador.puntos}')
         if opcion == 3:
             print("Espero te hayas divertido...")
             break
