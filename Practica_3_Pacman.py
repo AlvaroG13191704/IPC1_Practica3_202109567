@@ -210,6 +210,7 @@ def movimiento(jugador,lista_comida,lista_pared):
     #Imprimir el tablero
     tablero = pintar_tablero(lista_comida,lista_pared,jugador)
     imprimir_tablero(tablero)
+    print(f'Cantidad de comida creada {len(lista_comida)}---cantidad de paredes creadas {len(lista_pared)}')
     print("""
                 _______________________________
                 Movimientos
